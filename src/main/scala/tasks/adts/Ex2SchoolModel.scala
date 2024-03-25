@@ -28,3 +28,25 @@ object SchoolModel:
       def nameOfCourse(teacher: Teacher): String
       def setTeacherToCourse(teacher: Teacher, course: Course): School
       def coursesOfATeacher(teacher: Teacher): Sequence[Course]
+
+  object SchoolImpl extends SchoolModule:    
+
+    private case class CourseImpl(name: String)
+    private case class TeachherImpl(name: String, courses: Sequence[Course])
+    private case class SchoolImpl(teachers: Sequence[Teacher], courses: Sequence[Course])
+
+    opaque type Course = CourseImpl
+    opaque type Teacher = TeachherImpl
+    opaque type School = SchoolImpl
+
+    def newSchool(): School = SchoolImpl(Sequence.Nil(), Sequence.Nil())
+
+    extension (school: School) 
+      def addTeacher(name: String): School = ???
+      def addCourse(name: String): School = ???
+      def teacherByName(name: String): Optional[Teacher] = ???
+      def courseByName(name: String): Optional[Course] = ???
+      def nameOfTeacher(teacher: Teacher): String = ???
+      def nameOfCourse(teacher: Teacher): String = ???
+      def setTeacherToCourse(teacher: Teacher, course: Course): School = ???
+      def coursesOfATeacher(teacher: Teacher): Sequence[Course] = ???
